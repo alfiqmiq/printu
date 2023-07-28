@@ -1,0 +1,275 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Upload API",
+        "version": "1.0.0",
+        "description": "API endpoint for uploading images."
+    },
+    "servers": [
+        {
+            "url": "https://api.printu.test"
+        }
+    ],
+    "paths": {
+        "/v1/upload": {
+            "post": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "Upload images",
+                "description": "Endpoint for uploading images.",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "required": true,
+                        "description": "Authorization: Bearer xxxx",
+                        "schema": {
+                            "type": "string",
+                            "description": "Bearer token",
+                            "example": "xxxx"
+                        }
+                    },
+                    {
+                        "in": "header",
+                        "name": "Content-Type",
+                        "required": true,
+                        "description": "Content-Type",
+                        "schema": {
+                            "type": "string",
+                            "description": "Bearer token",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "File parts to be uploaded",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "part": {
+                                            "type": "integer",
+                                            "description": "Part number",
+                                            "example": 1
+                                        },
+                                        "etag": {
+                                            "type": "string",
+                                            "description": "ETag of the part",
+                                            "example": "a54357aff0632cce46d942af68356b38"
+                                        }
+                                    },
+                                    "required": [
+                                        "part",
+                                        "etag"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "description": "File ID",
+                                            "example": 2058959
+                                        },
+                                        "timestamp": {
+                                            "type": "integer",
+                                            "description": "Timestamp",
+                                            "example": 1516354800
+                                        },
+                                        "source": {
+                                            "type": "string",
+                                            "description": "Source of the file",
+                                            "example": "instagram"
+                                        },
+                                        "folder": {
+                                            "type": "string",
+                                            "description": "Folder path",
+                                            "example": null
+                                        },
+                                        "height": {
+                                            "type": "integer",
+                                            "description": "Height of the image",
+                                            "example": 1080
+                                        },
+                                        "width": {
+                                            "type": "integer",
+                                            "description": "Width of the image",
+                                            "example": 1080
+                                        },
+                                        "mime": {
+                                            "type": "string",
+                                            "description": "MIME type of the file",
+                                            "example": "image/jpeg"
+                                        },
+                                        "display": {
+                                            "type": "object",
+                                            "properties": {
+                                                "thumbnail": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "width": {
+                                                            "type": "integer",
+                                                            "description": "Thumbnail width",
+                                                            "example": 200
+                                                        },
+                                                        "height": {
+                                                            "type": "integer",
+                                                            "description": "Thumbnail height",
+                                                            "example": 200
+                                                        },
+                                                        "src": {
+                                                            "type": "string",
+                                                            "description": "Thumbnail URL",
+                                                            "example": "https://printu.test/media/catalog/cache/vH72u0x7Y4uf0Tdd1j%252F34EFgAluLOcapxlHI0rcqWYDEZi8ph6XztIGW4VGE1cuYIyIE/image.jpg"
+                                                        }
+                                                    }
+                                                },
+                                                "preview": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "width": {
+                                                            "type": "integer",
+                                                            "description": "Preview width",
+                                                            "example": 800
+                                                        },
+                                                        "height": {
+                                                            "type": "integer",
+                                                            "description": "Preview height",
+                                                            "example": 800
+                                                        },
+                                                        "src": {
+                                                            "type": "string",
+                                                            "description": "Preview URL",
+                                                            "example": "https://printu.test/media/catalog/cache/vH72u0x7Y4uf0Tdd1j%252F34EFgAluLOcapxlHI0rcqWYDEZi8ph6XztIsI%252BRE60RFRtAsn/image.jpg"
+                                                        }
+                                                    }
+                                                },
+                                                "square": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "width": {
+                                                            "type": "integer",
+                                                            "description": "Square image width",
+                                                            "example": 200
+                                                        },
+                                                        "height": {
+                                                            "type": "integer",
+                                                            "description": "Square image height",
+                                                            "example": 200
+                                                        },
+                                                        "src": {
+                                                            "type": "string",
+                                                            "description": "Square image URL",
+                                                            "example": "https://printu.test/media/catalog/cache/vH72u0x7Y4uf0Tdd1j%252F34EFgAluLOcapxlHI0rcqWYDEZi8ph6XztIsI%252BRE60RFRtAsn/image.jpg"
+                                                        }
+                                                    }
+                                                },
+                                                "original": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "width": {
+                                                            "type": "integer",
+                                                            "description": "Original image width",
+                                                            "example": 1080
+                                                        },
+                                                        "height": {
+                                                            "type": "integer",
+                                                            "description": "Original image height",
+                                                            "example": 1080
+                                                        },
+                                                        "src": {
+                                                            "type": "string",
+                                                            "description": "Original image URL",
+                                                            "example": "https://dev-printu-net.s3.eu-central-1.amazonaws.com/photobook/12/7/0/2058959.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAILKHTK5ZOAVQB23Q%2F20180209%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20180209T092316Z&X-Amz-SignedHeaders=host&X-Amz-Expires=518400&X-Amz-Signature=cc95d836e2235992e1948add1bc8f5cdb35d39dc974f8cfa23efd9895db32d38"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "metadata": {
+                                            "type": "object",
+                                            "properties": {
+                                                "gps": {
+                                                    "type": "string",
+                                                    "description": "GPS information",
+                                                    "example": "52/1, 15/1, 272/100 N 21/1, 1/1, 5851/100 E"
+                                                },
+                                                "datetime": {
+                                                    "type": "integer",
+                                                    "description": "Datetime",
+                                                    "example": 1516354800
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "description": "File name",
+                                                    "example": "IMG_9171.JPG"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errorCode": {
+                                            "type": "integer",
+                                            "description": "Error code",
+                                            "example": 400
+                                        },
+                                        "userMessage": {
+                                            "type": "string",
+                                            "description": "User-friendly error message",
+                                            "example": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed."
+                                        },
+                                        "devMessage": {
+                                            "type": "string",
+                                            "description": "Developer error message",
+                                            "example": "Check the client_id parameter."
+                                        },
+                                        "more": {
+                                            "type": "string",
+                                            "description": "Additional information",
+                                            "example": ""
+                                        },
+                                        "applicationCode": {
+                                            "type": "string",
+                                            "description": "Application-specific error code",
+                                            "example": "X1234"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": [
+                            "Bearer xxxx"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
